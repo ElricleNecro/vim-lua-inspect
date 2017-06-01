@@ -133,10 +133,21 @@ function! s:prepare_search_path() " {{{1
     call add(directories, xolox#misc#path#merge(root, 'metalualib'))
     call add(directories, xolox#misc#path#merge(root, 'luainspect'))
     let template = "package.path = package.path .. ';%s/?.lua'"
+    let c_template = "package.cpath = package.cpath .. ';%s/?.so'"
     let lines = []
     for directory in directories
       call add(lines, printf(template, escape(directory, '"\''')))
     endfor
+    if exists('g:lua_inspect_luapath')
+	    for directory in g:lua_inspect_luapath
+		    call add(lines, printf(template, escape(directory, '"\''')))
+	    endfor
+    endif
+    if exists('g:lua_inspect_luacpath')
+	    for directory in g:lua_inspect_luacpath
+		    call add(lines, printf(c_template, escape(directory, '"\''')))
+	    endfor
+    endif
     let code = join(lines, '; ')
     if has('lua') && g:lua_inspect_internal
       execute 'lua' code
