@@ -76,6 +76,14 @@ This command jumps to the definition of the variable under the cursor. It's used
 
 ## Options
 
+### The `g:lua_inspect_luapath` option
+
+This variable add the directories in the list to the lua path.
+
+### The `g:lua_inspect_luacpath` option
+
+This variable add the directories in the list to the lua cpath.
+
 ### The `g:loaded_luainspect` option
 
 This variable isn't really an option but if you want to avoid loading the `luainspect.vim` plug-in you can set this variable to any value in your [vimrc script] [vimrc]:
